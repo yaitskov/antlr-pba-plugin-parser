@@ -23,16 +23,16 @@ import java.util.ArrayList;
 
 plugins returns [ List<Plugin> plugins ]
 @init { $plugins = new ArrayList<Plugin>(); }:
-     ( plugin { $plugins.add($plugin.plugin); } ) +;
+     ( plugin PEND { $plugins.add($plugin.plugin); } ) +;
 plugin returns [ Plugin plugin ]:
-        DIRECT  jbilName=STR  pbaName=ID  mem=MEMORY
-        { $plugin = new DirectPlugin($jbilName.text, $pbaName.text, true); }
-        |  REDIRECT  jbilName=STR  pbaName=ID
+        DIRECT  jbilName=STR  pbaName=STR  mem=MEMORY
+        { $plugin = new DirectPlugin($jbilName.text, $pbaName.text, "remember".equals($mem.text)); }
+        |  REDIRECT  jbilName=STR  pbaName=STR
         { $plugin = new RedirectPlugin($jbilName.text, $pbaName.text); }
-        | ASSIST  jbilName=STR  pbaName=ID  paySystems
+        | ASSIST  jbilName=STR  pbaName=STR  paySystems
         { $plugin = new AssistPlugin($jbilName.text, $pbaName.text,
                                        $paySystems.enabledPaySystems); }
-        | CASH  jbilName=STR  pbaName=ID
+        | CASH  jbilName=STR  pbaName=STR
         { $plugin = new CashPlugin($jbilName.text, $pbaName.text); }  ;
 
 paySystems returns [ Set<String> enabledPaySystems ]

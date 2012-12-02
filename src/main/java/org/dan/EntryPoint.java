@@ -2,6 +2,7 @@ package org.dan;
 
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.antlr.runtime.*;
 
 import java.io.FileInputStream;
@@ -40,7 +41,8 @@ public class EntryPoint {
             CommonTokenStream stream = new CommonTokenStream(l);
             P p = new P(stream);
             List<Plugin> plugins = p.plugins();
-            Gson gson = new Gson();
+            // json is just for visualization
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
             System.out.println("json serialized output: " + gson.toJson(plugins));
         } catch (InvalidConfException e) {
             err("Invalid config");

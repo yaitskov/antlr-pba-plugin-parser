@@ -4,6 +4,7 @@ package org.dan;
 }
 
 @members {
+  private boolean keywordExpected = true;
   @Override
   public void reportError(RecognitionException e) {
     super.reportError(e);
@@ -13,12 +14,13 @@ package org.dan;
 
 LETTER: 'A' .. 'Z' | 'a' .. 'z' | '_';
 DIGIT: '0' .. '9';
+PEND: ';' { keywordExpected = true; };
 MEMORY: ('remember' | 'forget' );
 
-REDIRECT: 'redirect';
-DIRECT: 'direct' ;
-CASH: 'cash' ;
-ASSIST: 'assist';
+REDIRECT: { keywordExpected }? 'redirect' { keywordExpected = false; };
+DIRECT: { keywordExpected }? 'direct' { keywordExpected = false; } ;
+CASH: { keywordExpected }? 'cash' { keywordExpected = false; } ;
+ASSIST: { keywordExpected }? 'assist' { keywordExpected = false; };
 WEBM: 'webmoney';
 YM: 'yandexmoney';
 QIWI: 'qiwi';
