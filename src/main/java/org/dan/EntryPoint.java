@@ -39,11 +39,9 @@ public class EntryPoint {
             L l = new L(input);
             CommonTokenStream stream = new CommonTokenStream(l);
             P p = new P(stream);
-            List<Plugin> plugins = p.plugins;
+            List<Plugin> plugins = p.plugins();
             Gson gson = new Gson();
             System.out.println("json serialized output: " + gson.toJson(plugins));
-
-            System.out.println("counter = " + p.getCounter());
         } catch (IOException e) {
             err("Failed to read file '" + confPath + "' cause: " + e.getMessage());
         } catch (RecognitionException e) {
