@@ -1,0 +1,39 @@
+$ mvn clean install
+
+$ java -jar target/1-1.0.jar test.conf 
+
+You will get:
+
+json serialized output: [
+  {
+    "name": "Cash",
+    "ebsId": "Cash"
+  },
+  {
+    "name": "Cash",
+    "ebsId": "cash"
+  },
+  {
+    "name": "Cash",
+    "ebsId": "Cash"
+  },
+  {
+    "remember": true,
+    "name": "Diners",
+    "ebsId": "Diners"
+  },
+  {
+    "pluginId": 234,
+    "name": "BankCard",
+    "ebsId": "sagepay"
+  },
+  {
+    "enabledPaymentSystems": [
+      "YPayment",
+      "WPayment"
+    ],
+    "pluginId": 235,
+    "name": "BankCard",
+    "ebsId": "assist"
+  }
+]
