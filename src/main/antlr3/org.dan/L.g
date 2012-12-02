@@ -3,6 +3,14 @@ lexer grammar L;
 package org.dan;
 }
 
+@members {
+  @Override
+  public void reportError(RecognitionException e) {
+    super.reportError(e);
+    throw new InvalidConfException("invalid lexer");
+  }
+}
+
 LETTER: 'A' .. 'Z' | 'a' .. 'z' | '_';
 DIGIT: '0' .. '9';
 MEMORY: ('remember' | 'forget' );
@@ -38,3 +46,4 @@ ESCAPE: '\\'
              |'n'  { setText("\n");}
              |'r'  { setText("\r");}
              |'"'  { setText("\"");});
+

@@ -42,6 +42,8 @@ public class EntryPoint {
             List<Plugin> plugins = p.plugins();
             Gson gson = new Gson();
             System.out.println("json serialized output: " + gson.toJson(plugins));
+        } catch (InvalidConfException e) {
+            err("Invalid config");
         } catch (IOException e) {
             err("Failed to read file '" + confPath + "' cause: " + e.getMessage());
         } catch (RecognitionException e) {

@@ -12,6 +12,15 @@ import java.util.List;
 import java.util.ArrayList;
 }
 
+@members {
+  @Override
+  public void reportError(RecognitionException e) {
+    super.reportError(e);
+    throw new InvalidConfException("invalid lexer");
+  }
+}
+
+
 plugins returns [ List<Plugin> plugins ]
 @init { $plugins = new ArrayList<Plugin>(); }:
      ( plugin { $plugins.add($plugin.plugin); } ) +;
