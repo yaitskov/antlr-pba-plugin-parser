@@ -16,7 +16,7 @@ LETTER: 'A' .. 'Z' | 'a' .. 'z' | '_';
 DIGIT: '0' .. '9';
 PEND: ';' { keywordExpected = true; };
 MEMORY: ('remember' | 'forget' );
-
+NUM: DIGIT+ ;
 REDIRECT: { keywordExpected }? 'redirect' { keywordExpected = false; };
 DIRECT: { keywordExpected }? 'direct' { keywordExpected = false; } ;
 CASH: { keywordExpected }? 'cash' { keywordExpected = false; } ;

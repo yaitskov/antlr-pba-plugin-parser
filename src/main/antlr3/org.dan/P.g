@@ -27,11 +27,13 @@ plugins returns [ List<Plugin> plugins ]
 plugin returns [ Plugin plugin ]:
         DIRECT  jbilName=STR  pbaName=STR  mem=MEMORY
         { $plugin = new DirectPlugin($jbilName.text, $pbaName.text, "remember".equals($mem.text)); }
-        |  REDIRECT  jbilName=STR  pbaName=STR
-        { $plugin = new RedirectPlugin($jbilName.text, $pbaName.text); }
-        | ASSIST  jbilName=STR  pbaName=STR  paySystems
+        |  REDIRECT  jbilName=STR  pbaName=STR  NUM
+        { $plugin = new RedirectPlugin($jbilName.text, $pbaName.text,
+                                       Integer.parseInt($NUM.text)); }
+        | ASSIST  jbilName=STR  pbaName=STR  paySystems NUM
         { $plugin = new AssistPlugin($jbilName.text, $pbaName.text,
-                                       $paySystems.enabledPaySystems); }
+                                       $paySystems.enabledPaySystems,
+                                       Integer.parseInt($NUM.text)); }
         | CASH  jbilName=STR  pbaName=STR
         { $plugin = new CashPlugin($jbilName.text, $pbaName.text); }  ;
 

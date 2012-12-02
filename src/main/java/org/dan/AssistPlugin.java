@@ -10,8 +10,8 @@ public class AssistPlugin extends RedirectPlugin {
 
     Set<String> enabledPaymentSystems;
 
-    public AssistPlugin(String name, String ebsId, Set<String> enabledPaymentSystems) {
-        super(name, ebsId);
+    public AssistPlugin(String name, String ebsId, Set<String> enabledPaymentSystems, int pluginId) {
+        super(name, ebsId, pluginId);
         this.enabledPaymentSystems = enabledPaymentSystems;
     }
 
