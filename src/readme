@@ -1,0 +1,37 @@
+Hi, everybody!!!!
+
+I've bought new wireless keyboard.
+My first expression wasn't good.
+
+But since the time it becomes better.
+
+Ok. Let's start about antlr.
+
+
+In this example I want to implement parser of pba plugins configuration
+in jbilling application.
+
+
+There is the grammar:
+
+plugins:  plugin+ ;
+plugin: 'direct' jbilName=STR pbaName=ID memory
+      | 'redirect' jbilName=STR pbaName=ID
+      | 'assist'   jbilName=STR pbaName=ID assistPaySystems
+      | 'cash' jbilName=STR pbaName=ID;
+memory: 'forget' | 'remember' ;
+
+assistPaySystems: ('webmoney' | 'yandexmoney' | 'qiwi' | 'cards' ) + ;
+
+ID:  LETTER (LETTER | DIGIT) *;
+LETTER: 'A' .. 'Z' | 'a' .. 'z' | '_';
+DIGIT: '0' .. '9';
+STR
+@init { StringBuffer buf = new StringBuffer(); }:
+      '"' (esc=ESCAPE { buf.append($esc); }
+            | normal =~ ('"'|'\\'|'\n'|'\r') { buf.appendCodePoint($normal); } )*
+            '"' ) { $text = buf.toString() ; };
+ESCAPE: '\\' ('\\' { $text = "\"; }
+             |'n'  { $text = "\n";}
+             |'n'  { $text = "\r";}
+             |'"'  { $text = "\"";};
